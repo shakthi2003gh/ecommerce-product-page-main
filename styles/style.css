@@ -20,13 +20,13 @@ html {
   --color-heading: hsl(220, 13%, 13%);
   --color-backdrop: hsla(0, 0%, 0%, 0.75);
   --color-border: hsl(220, 14%, 75%);
-  --color-: hsl(25, 100%, 94%);
-  --color-: hsl(223, 64%, 98%);
+  --bg-quantity: hsl(223, 64%, 98%);
+  --shadow: hsl(25, 100%, 94%);
 
   /* >font size */
   --fs-bold: 3.4rem;
   --fs-medium: 2.8rem;
-  --fs-small: 1.6rem;
+  --fs-small: 1.53rem;
 }
 
 /* >Typography */
@@ -38,22 +38,77 @@ body {
 }
 
 h1 {
+  margin: 1rem 0;
+}
+
+h1,
+.discount-price {
   font-size: var(--fs-medium);
   color: var(--color-heading);
 }
 
 p {
-  line-height: 2.5ch;
+  line-height: 2.6ch;
   color: var(--color-accent);
+  max-width: 475px;
 }
 
-@media (min-width: 750px) {
+.product-company {
+  font-size: 1.2rem;
+  letter-spacing: 0.2ch;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.price-section,
+.product-company,
+.quantity,
+.cart-list p,
+.cart-item .price {
+  font-weight: bold;
+}
+
+.cart-item .price {
+  color: var(--color-heading);
+}
+
+.discount {
+  padding: 0.4rem 0.7rem 0.3rem;
+  border-radius: 5px;
+  color: var(--color-primary);
+  background-color: hsla(26, 100%, 55%, 0.171);
+}
+
+.product-price {
+  margin-left: auto;
+  color: var(--color-border);
+}
+
+.cart-list p {
+  display: grid;
+  place-content: center;
+}
+
+.cart-item p {
+  font-weight: 400;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 1000px) {
   body {
     padding: 0 4rem;
   }
+
+  h1 {
+    font-size: var(--fs-bold);
+    max-width: 450px;
+    margin-top: 1.5rem;
+    margin-bottom: 3.5rem;
+  }
 }
 
-/* >header */
+/* >Header */
 
 header,
 .header-left,
@@ -65,6 +120,7 @@ header,
 }
 
 header {
+  position: relative;
   padding: 2.5rem;
 }
 
@@ -123,7 +179,7 @@ header [alt="profile"] {
   height: 25px;
 }
 
-@media (min-width: 750px) {
+@media (min-width: 1000px) {
   header {
     padding: 3rem 0;
     border-bottom: 1px solid var(--color-border);
@@ -169,7 +225,7 @@ header [alt="profile"] {
   a:hover::after {
     position: absolute;
     left: 0;
-    bottom: -4rem;
+    bottom: -4.2rem;
     content: "";
     width: 0;
     height: 4px;
@@ -199,5 +255,263 @@ header [alt="profile"] {
   header [alt="profile"]:hover {
     border-color: var(--color-primary);
     border-radius: 100px;
+  }
+}
+
+/* >product section */
+@media (min-width: 1000px) {
+  .product-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8rem;
+    margin: 8rem 5rem;
+  }
+}
+/* >>Product image */
+.product__image {
+  position: relative;
+}
+
+.product__image img:nth-child(2) {
+  width: 100%;
+  height: clamp(300px, 100vw, 600px);
+  object-fit: cover;
+}
+
+.floating-button {
+  --button-size: 40px;
+  position: absolute;
+  top: calc(50% - var(--button-size) / 2);
+  display: grid;
+  place-content: center;
+  width: var(--button-size);
+  height: var(--button-size);
+  border-radius: 100px;
+  background-color: white;
+}
+
+.floating-button img {
+  width: 10px;
+  height: 12px;
+}
+
+.previous {
+  left: 2rem;
+}
+
+.next {
+  right: 2rem;
+}
+
+.product__preview {
+  display: none;
+}
+
+@media (min-width: 600px) {
+  .floating-button {
+    border: 1px solid;
+  }
+
+  .product__image img:nth-child(2) {
+    object-fit: contain;
+  }
+}
+
+@media (min-width: 1000px) {
+  .product__images {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .product__image img:nth-child(2) {
+    --image-size: 400px;
+
+    width: var(--image-size);
+    height: var(--image-size);
+    border-radius: 10px;
+  }
+
+  .floating-button {
+    display: none;
+  }
+
+  .product__preview {
+    display: flex;
+    justify-content: space-between;
+    width: var(--image-size);
+  }
+
+  .product__preview img {
+    width: 80px;
+    border-radius: 10px;
+  }
+
+  .product__preview img:hover,
+  button:hover {
+    cursor: pointer;
+    opacity: 0.5;
+  }
+
+  .product__preview img.preview {
+    opacity: 0.5;
+    outline: 2px solid var(--color-primary);
+  }
+}
+
+/* >> product detail */
+.product__details {
+  padding: 1.5rem 2.2rem;
+}
+
+/* >> product price */
+.price-section {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+@media (min-width: 1000px) {
+  .price-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: min-content;
+  }
+
+  .product-price {
+    margin-left: 0;
+  }
+}
+
+/* >>cart section */
+.cart-section {
+  display: grid;
+  gap: 1.5rem;
+  margin: 2rem 0 5rem;
+}
+
+.quantity {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  border-radius: 8px;
+  color: var(--color-heading);
+  background: var(--bg-quantity);
+}
+
+.quantity > * {
+  padding: 1.6rem;
+}
+
+button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  padding: 1.6rem;
+  border: none;
+  box-shadow: 0 50px 34px 6px var(--shadow);
+  border-radius: 8px;
+  color: white;
+  background: var(--color-primary);
+}
+
+@media (min-width: 700px) {
+  .cart-section {
+    display: grid;
+    grid-template-columns: 0.7fr 1.3fr;
+    margin: 4rem 0;
+  }
+}
+
+/* >cart section { */
+.cart-list {
+  position: absolute;
+  display: none;
+  top: 8.4rem;
+  right: 1rem;
+  height: 260px;
+  width: 95%;
+  max-width: 400px;
+  border-radius: 10px;
+  background-color: white;
+  z-index: 1;
+}
+
+.cart-list header {
+  font-size: 1.6rem;
+  font-weight: bold;
+  padding: 2rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.cart-list main {
+  display: grid;
+  gap: 3rem;
+  height: 13em;
+  padding: 3rem;
+}
+
+.cart-item {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.cart-item img:nth-child(1) {
+  width: 50px;
+  border-radius: 5px;
+}
+
+.cart-item img:nth-child(3) {
+  margin-left: auto;
+}
+
+.cart-list button {
+  box-shadow: none;
+}
+
+@media (min-width: 1000px) {
+  .cart-list {
+    right: -3rem;
+    width: 100%;
+    box-shadow: 0 15px 53px -7px rgb(0 0 0 / 42%);
+  }
+}
+
+/* >lightbox */
+@media (min-width: 1000px) {
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    display: none;
+    place-content: center;
+    gap: 3rem;
+    background-color: var(--color-backdrop);
+    user-select: none;
+  }
+
+  .lightbox .product__image::before {
+    position: absolute;
+    content: url(/images/icon-close.svg);
+    top: -3.5rem;
+    right: 0;
+  }
+
+  .lightbox .product__preview {
+    gap: 2rem;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .lightbox .product__image img:nth-child(2) {
+    --lightbox-img: 500px;
+
+    width: var(--lightbox-img);
+    height: var(--lightbox-img);
+    border-radius: 15px;
   }
 }
